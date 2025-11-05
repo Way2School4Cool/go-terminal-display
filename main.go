@@ -11,7 +11,7 @@ import (
 var imageLocation string = "Images/cat2.jpg"
 
 func main() {
-	width, height, err := term.GetSize(0)
+	width, height, err := term.GetSize(int(os.Stdout.Fd()))
 	if err != nil {
 		panic(err)
 	}
