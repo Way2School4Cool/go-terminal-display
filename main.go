@@ -8,7 +8,7 @@ import (
 	"golang.org/x/term"
 )
 
-var imageLocation string = "Images/cat.jpg"
+var imageLocation string = "Images/cat2.jpg"
 
 func main() {
 	width, height, err := term.GetSize(0)
