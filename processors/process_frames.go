@@ -5,9 +5,13 @@ import (
 	"image"
 	"image/color"
 	_ "image/jpeg" // Register JPEG format
+	_ "image/png"  // Register PNG format
 	"os"
+	"path/filepath"
 	"strings"
 	"sync"
+
+	_ "golang.org/x/image/webp" // Register WebP format
 
 	gloss "github.com/charmbracelet/lipgloss"
 )
@@ -18,8 +22,12 @@ func ReadImage(location string) [][]color.Color {
 		return nil
 	}
 
-	if strings.Split(location, ".")[1] != "jpg" {
-		fmt.Print("Unsupported Image Type:", location)
+	ext := strings.ToLower(strings.TrimPrefix(filepath.Ext(location), "."))
+	switch ext {
+	case "jpg", "jpeg", "png", "webp":
+		// supported
+	default:
+		fmt.Println("Unsupported Image Type:", location)
 		return nil
 	}
 

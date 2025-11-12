@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	frames "go-terminal-display/processors"
+	"os"
 	"time"
 
 	"golang.org/x/term"
@@ -11,6 +12,15 @@ import (
 var imageLocation string = "Images/cat2.jpg"
 
 func main() {
+	// allow overriding the default image via first CLI argument
+	if len(os.Args) > 1 {
+		if os.Args[1] == "-h" || os.Args[1] == "--help" {
+			fmt.Printf("Usage: %s [image-file]\n", os.Args[0])
+			os.Exit(0)
+		}
+		imageLocation = os.Args[1]
+	}
+
 	width, height, err := term.GetSize(int(os.Stdout.Fd()))
 	if err != nil {
 		panic(err)
